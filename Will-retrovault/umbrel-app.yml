@@ -1,26 +1,32 @@
 manifestVersion: 1
 id: will-retrovault
-name: retrovault
-tagline: É um sistema voltado para colecionadores de videogames, funcionando como um inventário digital da coleção. Ele permite
+name: RetroVault
+tagline: Gerencie sua coleção física de videogames
 icon: https://play-lh.googleusercontent.com/Zkw5uFYUtGhoDtwL8gp801rI_iuBLXfn3JEWEVjo_6Bcn6o7S5RXfuL7VT85yj3Vkvapdi_NSeo8VRtjcJBuofU=w240-h480-rw
 category: Development
 version: "1.0.0"
-port: 3000
+
 description: >-
-  É um sistema voltado para colecionadores de videogames, funcionando como um inventário digital da coleção. Ele permite
-developer: Umbrel
-website: https://umbrel.com
-submitter: Umbrel
-submission: https://github.com/getumbrel/umbrel-hello-world-app
-repo: https://github.com/getumbrel/umbrel-hello-world-app
-support: https://github.com/getumbrel/umbrel-hello-world-app/issues
-gallery:
-  - https://i.imgur.com/yyVG0Jb.jpeg
-  - https://i.imgur.com/yyVG0Jb.jpeg
-  - https://i.imgur.com/yyVG0Jb.jpeg
-releaseNotes: >-
-  Add what's new in the latest version of your app here.
-dependencies: 
+  Sistema self-hosted para gerenciamento e inventário de coleções
+  de videogames, consoles e itens relacionados.
+
+developer: William Carlos
+website: https://github.com/williamcarlos2/Umbrel-for-Gaming
+submitter: William Carlos
+
+repo: https://github.com/williamcarlos2/Umbrel-for-Gaming
+
+support: https://github.com/williamcarlos2/Umbrel-for-Gaming/issues
+
+gallery: []
+
+releaseNotes: ""
+
+dependencies: []
+
+port: 3000
+
 path: ""
+
 defaultUsername: ""
 defaultPassword: ""
