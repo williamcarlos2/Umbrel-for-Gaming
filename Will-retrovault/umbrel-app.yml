@@ -7,17 +7,7 @@ category: Development
 version: "1.0.0"
 port: 3000
 description: >-
-  É um sistema voltado para colecionadores de videogames, funcionando como um inventário digital da coleção. Ele permite:
-
-🎮 Cadastrar jogos por plataforma
-📦 Controlar se possui caixa, manual e cartucho/disco
-📸 Adicionar fotos dos seus itens
-🔎 Pesquisar e filtrar a coleção
-❤️ Criar uma wishlist
-📱 Digitalizar jogos através de fotos usando reconhecimento por IA
-🏛️ Visualizar a coleção como uma espécie de "museu"
-📊 Organizar e acompanhar sua coleção física
-
+  É um sistema voltado para colecionadores de videogames, funcionando como um inventário digital da coleção. Ele permite
 developer: Umbrel
 website: https://umbrel.com
 submitter: Umbrel
@@ -30,7 +20,7 @@ gallery:
   - https://i.imgur.com/yyVG0Jb.jpeg
 releaseNotes: >-
   Add what's new in the latest version of your app here.
-dependencies: []
+dependencies: 
 path: ""
 defaultUsername: ""
 defaultPassword: ""
