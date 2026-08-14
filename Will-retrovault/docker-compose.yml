@@ -1,20 +1,20 @@
 services:
+
+  app_proxy:
+    environment:
+      APP_HOST: will-retrovault_retrovault_1
+      APP_PORT: 3000
+
   retrovault:
-    build:
-      context: https://github.com/theretrovault/retrovault.git#prod
-      dockerfile: retrovault/Dockerfile
-    container_name: retrovault
-    restart: unless-stopped
-    ports:
-      - "3099:3000"
+    image: ghcr.io/williamcarlos2/retrovault:latest
+    restart: on-failure
+    stop_grace_period: 1m
+
     volumes:
-      - retrovault-data:/app/data
-      - retrovault-logs:/app/logs
+      - ${APP_DATA_DIR}/data:/app/data
+      - ${APP_DATA_DIR}/logs:/app/logs
+
     environment:
       NODE_ENV: production
       PORT: 3000
       DATABASE_URL: file:/app/data/retrovault.db
-
-volumes:
-  retrovault-data:
-  retrovault-logs:
