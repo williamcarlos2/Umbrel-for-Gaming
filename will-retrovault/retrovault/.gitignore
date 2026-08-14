@@ -1,0 +1,61 @@
+# Dependencies
+node_modules/
+.next/
+
+# Personal data — NEVER commit to public repo
+data/inventory.json
+data/favorites.json
+data/sales.json
+data/acquisitions.json
+data/watchlist.json
+data/goals.json
+data/grails.json
+data/playlog.json
+data/tags.json
+data/events.json
+data/whatnot.json
+data/deals/
+data/craigslist-deals.json
+data/reddit-alerts.json
+data/achievements-unlocked.json
+data/value-history.json
+data/app.config.json
+# Secrets
+.env.local
+.env
+# Logs (runtime, not for public)
+logs/
+# Temp / runtime
+data/fetch.lock
+data/scrapers.json
+# OS
+.DS_Store
+*.log
+# Plex integration (personal, optional feature — keep locally but don't publish)
+src/app/plex/
+src/app/api/plex/
+data/youtube-cache.json
+# Memory Bank / Mission Control (personal AI workspace — not part of RetroVault)
+src/app/journal/
+src/lib/markdown.ts
+/src/generated/prisma
+# SQLite database files
+*.db
+data/retrovault.db*.db-shm
+*.db-wal
+data/config.json
+data/exists.json
+data/formatted.json
+data/items.json
+data/overwrite.json
+data/test.json
+coverage/
+fixtures/
+AGENTS.md
+CLAUDE.md
+SOUL.md
+USER.md
+MEMORY.md
+HEARTBEAT.md
+TOOLS.md
+DREAMS.md

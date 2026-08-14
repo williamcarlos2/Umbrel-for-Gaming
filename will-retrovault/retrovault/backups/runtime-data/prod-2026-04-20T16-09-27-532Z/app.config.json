@@ -1,0 +1,629 @@
+{
+  "appName": "RetroVault",
+  "tagline": "Your Retro Gaming Collection Engine",
+  "ownerName": "Alex",
+  "contactEmail": "",
+  "contactPhone": "",
+  "shareContact": false,
+  "themeColor": "green",
+  "currency": "$",
+  "dateFormat": "US",
+  "publicUrl": "https://retrovault.peschpit.com",
+  "standaloneMode": true,
+  "auth": {
+    "enabled": false,
+    "passwordHash": ""
+  },
+  "plex": {
+    "url": "https://192.168.1.2:32400",
+    "token": "s3_dpsVi8rCxG-ciJP32"
+  },
+  "fetchScheduleHour": 0,
+  "priceDataSource": "pricecharting",
+  "scrapers": {
+    "craigslistCity": "portland"
+  },
+  "features": {
+    "collection": true,
+    "business": true,
+    "fieldTools": true,
+    "social": true,
+    "personal": true
+  },
+  "platforms": [
+    "NES",
+    "SNES",
+    "Nintendo 64",
+    "Gamecube",
+    "Nintendo Switch",
+    "Sega Genesis",
+    "Sega CD",
+    "Dreamcast",
+    "PS1",
+    "PS2",
+    "PS3",
+    "PSP",
+    "Xbox",
+    "Xbox 360",
+    "Wii"
+  ],
+  "region": "NTSC",
+  "githubRepo": "theretrovault/retrovault",
+  "apiKeys": [
+    {
+      "id": "7c22bc0e-e0ba-4ccb-9fae-0dd53636a9b0",
+      "name": "Read Only",
+      "keyHash": "6bac37df7948fe558f086b85a5319a25730aea420f261f051c44cfbae225f90b",
+      "prefix": "rvk_b1e2d1ce",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:28:56.738Z",
+      "lastUsed": "2026-04-14T12:28:56.738Z"
+    },
+    {
+      "id": "c354719f-865c-4dd3-a646-5b01dcb316ce",
+      "name": "Write Key",
+      "keyHash": "8ab684ff3b9bd39e398d0752a2b7326e5b330027ef257fb4043c6cd705eb86dd",
+      "prefix": "rvk_94bbbcbc",
+      "permissions": "write",
+      "createdAt": "2026-04-14T12:28:56.739Z",
+      "lastUsed": "2026-04-14T12:28:56.740Z"
+    },
+    {
+      "id": "5a094acb-38da-486e-a68d-80ba576ac602",
+      "name": "Test Key",
+      "keyHash": "2c88009526bfdec00ca596da88c4f9a89d0dbfe2fca0b67e488bfad93233a361",
+      "prefix": "rvk_e1551ae6",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:00.601Z"
+    },
+    {
+      "id": "3378616e-3ef2-41e1-b249-2221f601f940",
+      "name": "Secret Key",
+      "keyHash": "c2e6b1a15c1d8681942b64f87b3611f429dfa1727670349dbac60755c8401eec",
+      "prefix": "rvk_8a817e8b",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:00.609Z"
+    },
+    {
+      "id": "936fb853-ce55-4d0b-8591-427f8c5ab7f9",
+      "name": "Display Key",
+      "keyHash": "266928d2ec8294e76c5a284e34f11c6d8423b328ff2222b6c049223636394870",
+      "prefix": "rvk_21720ff3",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:00.610Z"
+    },
+    {
+      "id": "a60a1bd7-5ec3-4b75-91b1-4ef76170a468",
+      "name": "To Revoke",
+      "keyHash": "16b86320af9a1eeb599fa046ac6146b2ceb66db49aa2151839db0d8ecf111e97",
+      "prefix": "rvk_17b80226",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:00.612Z"
+    },
+    {
+      "id": "4f98cb1f-e979-4582-9473-f7cd67073cf0",
+      "name": "Key A",
+      "keyHash": "303cb2752fa6c9dc0d879b7bd95c8cd004fe3339217407d96fd9d11e333d8227",
+      "prefix": "rvk_5237f309",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:00.615Z"
+    },
+    {
+      "id": "19e0070e-909e-475e-a571-90f89b056d4e",
+      "name": "Key B",
+      "keyHash": "0424b38b006ad636dd09ed20fa49e85ecbdb4b1d1172c3851b48cfd82cb7777d",
+      "prefix": "rvk_5b0469de",
+      "permissions": "write",
+      "createdAt": "2026-04-14T12:29:00.615Z"
+    },
+    {
+      "id": "57612ac8-9791-4a91-9901-f95b1c22dcdb",
+      "name": "Valid Key",
+      "keyHash": "de10c1d59705eab3bd666d3350212764918633b5e4bc219bad46bd64517b06dc",
+      "prefix": "rvk_abf48c2d",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:00.616Z",
+      "lastUsed": "2026-04-14T12:29:00.616Z"
+    },
+    {
+      "id": "e211abac-8ae3-4d0b-9d20-100b9d4a81df",
+      "name": "Track Key",
+      "keyHash": "df29ca5d7e0e3f99521a0a2ca710a3655be91f13bdfaa092485a39d2bcaef3d8",
+      "prefix": "rvk_9388ed59",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:00.617Z",
+      "lastUsed": "2026-04-14T12:29:00.618Z"
+    },
+    {
+      "id": "ab0fc614-472a-4e3d-ba79-329358fa6e79",
+      "name": "Revoke Me",
+      "keyHash": "692787ee2482aad820d38f851323ebb425b61667b85c480d5a6abf6de856c2a9",
+      "prefix": "rvk_064a23fb",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:00.619Z",
+      "lastUsed": "2026-04-14T12:29:00.619Z"
+    },
+    {
+      "id": "dfcf53ac-2347-4086-a8eb-978d40827f09",
+      "name": "Bearer Test",
+      "keyHash": "a23f22ea5d55ae522ce7fef9500938720e2ec5be38bfee69089a5092cfd7f0cf",
+      "prefix": "rvk_c3120818",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:00.624Z",
+      "lastUsed": "2026-04-14T12:29:00.625Z"
+    },
+    {
+      "id": "17fe7aa3-6e56-45f3-8dac-cf4dad77238e",
+      "name": "Header Test",
+      "keyHash": "ceed56dec57308814f12a7c6eb0c70e58be9d4f294275522058646bb9d207e3a",
+      "prefix": "rvk_177ff4a6",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:00.625Z",
+      "lastUsed": "2026-04-14T12:29:00.625Z"
+    },
+    {
+      "id": "4ef704fb-f26a-45fb-8926-ca66f90e1fe5",
+      "name": "Read Only",
+      "keyHash": "a5e6813abfde75c14d84389b7dbbdb6deee8b8663180a1b8785d2dec2d4f0f4f",
+      "prefix": "rvk_d37729bc",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:00.626Z",
+      "lastUsed": "2026-04-14T12:29:00.626Z"
+    },
+    {
+      "id": "86f492b9-6d90-4245-bd0b-20819d9faa2d",
+      "name": "Write Key",
+      "keyHash": "a6ed1a57cfbdf76d604c95291c7ab78d90bbc70150ebb6a75c416c75fb566780",
+      "prefix": "rvk_0eb847e5",
+      "permissions": "write",
+      "createdAt": "2026-04-14T12:29:00.627Z",
+      "lastUsed": "2026-04-14T12:29:00.627Z"
+    },
+    {
+      "id": "1b10c501-be97-439b-90d8-6fd0f88425b9",
+      "name": "Test Key",
+      "keyHash": "ad87f39dae523b55580070048b693ea5e2ccabdb1e534d966192c20703109397",
+      "prefix": "rvk_0eefab35",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:05.185Z"
+    },
+    {
+      "id": "e3037088-0d2b-405f-b19f-b40188a5be1c",
+      "name": "Secret Key",
+      "keyHash": "96ebedb95e5c71630d33e4f265ff9636a856b5b5f3d521e46a0399cbc468b450",
+      "prefix": "rvk_2e06cfd2",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:05.195Z"
+    },
+    {
+      "id": "71341e1c-9299-427b-b1bf-5f38550ccfb9",
+      "name": "Display Key",
+      "keyHash": "3a4552837ee35f413d13ea99a2e012e5459612e200394105c571e52781f1b661",
+      "prefix": "rvk_12292e6d",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:05.196Z"
+    },
+    {
+      "id": "8ca33dfc-bb74-4c61-9140-bfa230fa0b6d",
+      "name": "To Revoke",
+      "keyHash": "21574efa490c70ea0c2fc59f16a2fd6aad681cb140a2b8f19fc221d62370110d",
+      "prefix": "rvk_99fbf426",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:05.198Z"
+    },
+    {
+      "id": "5332a121-e757-4f9f-bae9-5af0ff56c9e1",
+      "name": "Key A",
+      "keyHash": "b486ca698ff593f42848f8314aae4e4e957552135564660223e55658e57d3cf9",
+      "prefix": "rvk_5c28728f",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:05.201Z"
+    },
+    {
+      "id": "1e78ec70-5c3d-4543-a87b-636edee2411b",
+      "name": "Key B",
+      "keyHash": "695def1f12ad5da88e025745a2ca3eb76a39070033e99297bcb7cd880e324431",
+      "prefix": "rvk_ea99fd70",
+      "permissions": "write",
+      "createdAt": "2026-04-14T12:29:05.201Z"
+    },
+    {
+      "id": "2df3bba3-5f52-4abe-b5e9-ecda597e1919",
+      "name": "Valid Key",
+      "keyHash": "7b8584f7a078611c0739b746ffd5c30ac1425dbd6caf146517a1680264654b98",
+      "prefix": "rvk_532cf237",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:05.203Z",
+      "lastUsed": "2026-04-14T12:29:05.203Z"
+    },
+    {
+      "id": "cdf06eae-41a8-433e-b4b7-076fa70c4018",
+      "name": "Track Key",
+      "keyHash": "090302e2e5bc717d13e4f16afc07bfc5f06bbe3dd04c91f513680d22972504a2",
+      "prefix": "rvk_942e3a63",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:05.204Z",
+      "lastUsed": "2026-04-14T12:29:05.205Z"
+    },
+    {
+      "id": "dff6aa1e-8317-4936-be83-8e2920fdac64",
+      "name": "Revoke Me",
+      "keyHash": "eb7939cac11d49d451e84aaa12132b9f597e49fc2e8ddbe3b96b4164662e1433",
+      "prefix": "rvk_99efe340",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:05.206Z",
+      "lastUsed": "2026-04-14T12:29:05.207Z"
+    },
+    {
+      "id": "c966f2f8-2170-459b-b1e6-97f2de7e84c3",
+      "name": "Bearer Test",
+      "keyHash": "2bf69c1df8951b96b0b822f911e1d53d0fb92d9f8c9f6e65b2273d99f4a45ffb",
+      "prefix": "rvk_7f205315",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:05.212Z",
+      "lastUsed": "2026-04-14T12:29:05.212Z"
+    },
+    {
+      "id": "cdaa689b-51cd-4bde-93d3-7cb0c30feb35",
+      "name": "Header Test",
+      "keyHash": "ddf7ff5df4763431f36e6de058ae1ecde54225c36ca128d3c6f592877b448df8",
+      "prefix": "rvk_248d6eee",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:05.213Z",
+      "lastUsed": "2026-04-14T12:29:05.216Z"
+    },
+    {
+      "id": "aa0777b1-5248-49d2-890d-789376f44450",
+      "name": "Read Only",
+      "keyHash": "49887d8729705286a68e0177b9e26fcc30fa26dff4cf1bccd1f8657eda509e8d",
+      "prefix": "rvk_7114638e",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:05.217Z",
+      "lastUsed": "2026-04-14T12:29:05.217Z"
+    },
+    {
+      "id": "d9de782e-50bc-4fdb-af48-61508188b70a",
+      "name": "Write Key",
+      "keyHash": "827b9e1ed93294e86ce1a772f0e6b75f3f0d83bf57c3359b5b4218afb4973b36",
+      "prefix": "rvk_7a5faa6b",
+      "permissions": "write",
+      "createdAt": "2026-04-14T12:29:05.218Z",
+      "lastUsed": "2026-04-14T12:29:05.218Z"
+    },
+    {
+      "id": "c9b99a8a-d272-4ad7-8226-2715340d3a5c",
+      "name": "Test Key",
+      "keyHash": "4ba053eef56a6a9b7beeda1fa149f13f079b1c9c33e4f9a35144a41231e27c3e",
+      "prefix": "rvk_f04eefcc",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:41.690Z"
+    },
+    {
+      "id": "2535fac3-2f9a-448e-8f34-bd5154fc3037",
+      "name": "Secret Key",
+      "keyHash": "739004a137c6817d04a9009882edb9a17f4c00d736fb42219d475f0a4e79f6f0",
+      "prefix": "rvk_d44257ea",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:41.699Z"
+    },
+    {
+      "id": "4aa528f8-09c4-40ae-9300-bf18d14d48a0",
+      "name": "Display Key",
+      "keyHash": "154f718dc6e2d72ee925abeb3a61f26a0eec368f020b664512d71f3c3b44cba9",
+      "prefix": "rvk_00234e18",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:41.700Z"
+    },
+    {
+      "id": "dbcb873a-d6a2-4d52-ab19-755d1c6f54b6",
+      "name": "To Revoke",
+      "keyHash": "141e17bc41cb778d2ba198d839201e9eedf1c8919c41f3c462e5c78ec0207fc5",
+      "prefix": "rvk_16a08d4b",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:41.702Z"
+    },
+    {
+      "id": "ad5bce95-ec63-4370-ad83-6dbe9099061f",
+      "name": "Key A",
+      "keyHash": "ffe0ebf255a41d58ffca98e6b9f17346fce64373d879031783029cba29cc2493",
+      "prefix": "rvk_6ed3e45e",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:41.705Z"
+    },
+    {
+      "id": "1d658a0c-c2ef-4b96-9a7a-590110933b73",
+      "name": "Key B",
+      "keyHash": "028329b74f81ca01b1ad82732cf65bccbf222f39c22be84ea475657c9fa6f204",
+      "prefix": "rvk_1fa06578",
+      "permissions": "write",
+      "createdAt": "2026-04-14T12:29:41.705Z"
+    },
+    {
+      "id": "4866ad9a-13e1-41a5-827a-25172a7699c1",
+      "name": "Valid Key",
+      "keyHash": "634f622250b44242380db23523dc38cf6d66fe181cf76c87d83a4c1aee894c38",
+      "prefix": "rvk_71c10191",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:41.707Z",
+      "lastUsed": "2026-04-14T12:29:41.708Z"
+    },
+    {
+      "id": "ae1ed0fd-9950-4431-9e8d-cda93ea2e38d",
+      "name": "Track Key",
+      "keyHash": "4cafa86ff1492f626d8d05d4975ac69e14c814ef67ef274a8f21110a5852b2f4",
+      "prefix": "rvk_973fc4f1",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:41.709Z"
+    },
+    {
+      "id": "f777f520-52c1-40b9-b3b9-46a0d30ee5b2",
+      "name": "Revoke Me",
+      "keyHash": "89e3cd6ff90cf47741322f7f33e85c232335f0452c2eccb68b445dd66b41c4b3",
+      "prefix": "rvk_5f4a5562",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:41.711Z",
+      "lastUsed": "2026-04-14T12:29:41.711Z"
+    },
+    {
+      "id": "13c1939e-5379-463b-84de-525cb1cc9ef8",
+      "name": "Bearer Test",
+      "keyHash": "7054733bcc1b05b10cf61f345341be1b12c018355d42ccc70ed2a4d4feb28697",
+      "prefix": "rvk_d43e5270",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:41.716Z",
+      "lastUsed": "2026-04-14T12:29:41.717Z"
+    },
+    {
+      "id": "456943ad-1eeb-484e-9a14-153389d4414a",
+      "name": "Header Test",
+      "keyHash": "a62e6a2f41b52db9233b44fb4de859704b4a50a92e45e1007626e50dfaa7a878",
+      "prefix": "rvk_82ecf9db",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:41.721Z",
+      "lastUsed": "2026-04-14T12:29:41.721Z"
+    },
+    {
+      "id": "d985b3e5-3923-44f9-80f0-adce8a5b5818",
+      "name": "Read Only",
+      "keyHash": "a153e5ec512822688c14ebf32a677a90b9bab454e3e465ecc56737988dd15d76",
+      "prefix": "rvk_fd979eb1",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:41.722Z",
+      "lastUsed": "2026-04-14T12:29:41.722Z"
+    },
+    {
+      "id": "e6b508f3-7be8-4e61-9bb5-1d3c9e7a708b",
+      "name": "Write Key",
+      "keyHash": "92c61001ef6f13d325674b11bc4e22922f8ae9d7819561a5387e2bfaf4dbfa7a",
+      "prefix": "rvk_61db2413",
+      "permissions": "write",
+      "createdAt": "2026-04-14T12:29:41.723Z",
+      "lastUsed": "2026-04-14T12:29:41.724Z"
+    },
+    {
+      "id": "f416ca7e-53a8-4a7c-90e2-05912f9b1824",
+      "name": "Test Key",
+      "keyHash": "d84e89661a1ba38c0a9731791ba9432ac6ebc8069609e71340d44d8352b38a14",
+      "prefix": "rvk_229d90ae",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:45.922Z"
+    },
+    {
+      "id": "819ad10d-44b5-4071-9d8d-f45bb42c3b63",
+      "name": "Secret Key",
+      "keyHash": "610796419c138cc5e9c79d2000a452878ac010d530db2916c7c8013d78a50726",
+      "prefix": "rvk_c9541630",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:45.931Z"
+    },
+    {
+      "id": "52c32f83-e7d3-4bfd-9213-bb44152257dc",
+      "name": "Display Key",
+      "keyHash": "8c2342f547c69689942f76d5636b1965c6bd64993a9bec5ded21cad09964e2ca",
+      "prefix": "rvk_c98375fa",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:45.932Z"
+    },
+    {
+      "id": "c76689c0-82c1-4871-8784-aa13b2b9106e",
+      "name": "To Revoke",
+      "keyHash": "0bcdae228128d809221ca432b1326479fb5c3bc3838035d263ac1ea78cbf054b",
+      "prefix": "rvk_2e312869",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:45.935Z"
+    },
+    {
+      "id": "fb7b5b9b-8060-4eac-bb53-4f6e83973e46",
+      "name": "Key A",
+      "keyHash": "5f5bcdfdfc8462322dc47cceb9ea8db1413b933c8369797b8b87a5dac75a4f55",
+      "prefix": "rvk_55e52d00",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:45.938Z"
+    },
+    {
+      "id": "d50f6319-0e6b-41d6-8ca6-87d538245e60",
+      "name": "Key B",
+      "keyHash": "6fd9bde6e4a9694260c3e0085bd00448a839c3488a2b0d71016b8df4bb49fd96",
+      "prefix": "rvk_504124cb",
+      "permissions": "write",
+      "createdAt": "2026-04-14T12:29:45.938Z"
+    },
+    {
+      "id": "e5958a14-53db-4258-bcc8-38d43a4159c9",
+      "name": "Valid Key",
+      "keyHash": "e5e4b637ca1df9998d75a3d50bb8da5f092c67f9325fd29476eeb5002528fd29",
+      "prefix": "rvk_f1a54794",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:45.940Z",
+      "lastUsed": "2026-04-14T12:29:45.941Z"
+    },
+    {
+      "id": "2cea32b1-2df5-42aa-a8be-440b7117c5e5",
+      "name": "Track Key",
+      "keyHash": "b33038e5b1c95341f92d223f37279050c100a0da610dfa8a6106a432e688295e",
+      "prefix": "rvk_7cc30664",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:45.942Z"
+    },
+    {
+      "id": "0e040505-a38f-47e9-b2a1-97c0f862a1d4",
+      "name": "Revoke Me",
+      "keyHash": "5accc363ef01ab12fdd7a3e657ac552a14560f743bdb8f5871c95a062d08e77e",
+      "prefix": "rvk_1f53916c",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:45.944Z",
+      "lastUsed": "2026-04-14T12:29:45.944Z"
+    },
+    {
+      "id": "77d32d35-b93a-4625-9232-34f6c1920362",
+      "name": "Bearer Test",
+      "keyHash": "5bb81b53e3ca48247873b239e2dfbf346319d9feb54f57f00dc7af840a3cd917",
+      "prefix": "rvk_7dd256b2",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:45.952Z",
+      "lastUsed": "2026-04-14T12:29:45.953Z"
+    },
+    {
+      "id": "536748b6-8a01-49c6-9a15-4e23cd496be9",
+      "name": "Header Test",
+      "keyHash": "fd11fc66390e615a45b50dd10e14461ad134f47ee3af8fb092734e65df7082ca",
+      "prefix": "rvk_ab964d13",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:45.953Z",
+      "lastUsed": "2026-04-14T12:29:45.954Z"
+    },
+    {
+      "id": "c16acbe9-f5f2-4888-a1db-314879a125be",
+      "name": "Read Only",
+      "keyHash": "d6b8188999a4ed73f4cc592ce5ecb4bc6766e6bf5ad78ed4dbf47235cae5dce7",
+      "prefix": "rvk_6c84dad1",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:45.955Z",
+      "lastUsed": "2026-04-14T12:29:45.955Z"
+    },
+    {
+      "id": "ba11c64c-c008-4cbd-984c-4b028086169f",
+      "name": "Write Key",
+      "keyHash": "4dd65ba48dfab6a0ccafdb86fc7a14811944e91a9a6551742cc20e5cc038917a",
+      "prefix": "rvk_f153b4e9",
+      "permissions": "write",
+      "createdAt": "2026-04-14T12:29:45.956Z",
+      "lastUsed": "2026-04-14T12:29:45.957Z"
+    },
+    {
+      "id": "79147707-dae3-4534-900d-cdd1eec6adf1",
+      "name": "Test Key",
+      "keyHash": "ab3a1c7b10a0073cdf8b8291f7741f0773a27eebd879504eca1b2ce50c47361d",
+      "prefix": "rvk_1247cdbc",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:50.140Z"
+    },
+    {
+      "id": "ec5c9ecf-49e7-4663-966c-c8c23cfecd12",
+      "name": "Secret Key",
+      "keyHash": "a89f0f7c9fee463d779889f3fd7908fea75bc09e2eb49afe1f45a7ed00c78463",
+      "prefix": "rvk_9d592884",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:50.148Z"
+    },
+    {
+      "id": "7baaf8e0-1f4c-4957-a65b-1e6fda944600",
+      "name": "Display Key",
+      "keyHash": "269597ec960dc296f08ede873c066fe711cab18b0bf2d6c05d926fc9ba92d8b0",
+      "prefix": "rvk_205203c6",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:50.149Z"
+    },
+    {
+      "id": "ff80c6d0-2710-47c5-bcd4-78ecd50482d0",
+      "name": "To Revoke",
+      "keyHash": "05334e8ec3b9967f382a5db282b3ec35889857bafaae954edc68f267270fa9a8",
+      "prefix": "rvk_0af855a5",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:50.151Z"
+    },
+    {
+      "id": "e82ecbb3-1f3a-41c8-9cf4-1b7206c8871d",
+      "name": "Key A",
+      "keyHash": "41be3841e4833244df45608afe644ee7bca48fff5fe8b2e4d284300bca620131",
+      "prefix": "rvk_401424a9",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:50.154Z"
+    },
+    {
+      "id": "024a5fbf-0c19-4ed8-876c-12d2007dabd8",
+      "name": "Key B",
+      "keyHash": "49290517550e0c3441e5fb9ebbf1abee9d0d02feb53dc69fb2fd4d9bfbcfddb6",
+      "prefix": "rvk_5f93dc58",
+      "permissions": "write",
+      "createdAt": "2026-04-14T12:29:50.154Z"
+    },
+    {
+      "id": "9b2f2911-0ac1-4734-ad86-2114a7326753",
+      "name": "Valid Key",
+      "keyHash": "de35933e2a3bcdf40d6bbc25ac86f0dd7456fe279665c0e32a1ea7d3e9e4e801",
+      "prefix": "rvk_58032dda",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:50.156Z",
+      "lastUsed": "2026-04-14T12:29:50.156Z"
+    },
+    {
+      "id": "06fbd847-f88a-4c78-8dba-1ffdeb065cc0",
+      "name": "Track Key",
+      "keyHash": "0ba9393481cb7a119a900df51318c2cde2cd58a905a9a238b1163787be727660",
+      "prefix": "rvk_7e9ee647",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:50.158Z"
+    },
+    {
+      "id": "c5a890d9-9691-4557-a358-63f3808ed521",
+      "name": "Revoke Me",
+      "keyHash": "835dc5402c0a805b29cf3b9aff597d560a29e8021f73b5500284b2ce3e0afae2",
+      "prefix": "rvk_71085642",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:50.159Z",
+      "lastUsed": "2026-04-14T12:29:50.162Z"
+    },
+    {
+      "id": "b74ed188-8ee8-4385-bf73-0e32749781ff",
+      "name": "Bearer Test",
+      "keyHash": "7e647b052f5f36e0042d7d3ba1fb89f17ad0a5678ba3f9c3fb5d1f8d3fafaf7c",
+      "prefix": "rvk_9e40cfca",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:50.167Z",
+      "lastUsed": "2026-04-14T12:29:50.168Z"
+    },
+    {
+      "id": "78dc547b-e2f3-4f92-b79a-aa586ad16349",
+      "name": "Header Test",
+      "keyHash": "3d4f149271a1734a8add3c7f3fb09ef45be35de28f32568e2ec7e36443ed4089",
+      "prefix": "rvk_6c2b05b7",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:50.168Z",
+      "lastUsed": "2026-04-14T12:29:50.169Z"
+    },
+    {
+      "id": "2e972cc8-74be-4646-8a20-4199fc4435c6",
+      "name": "Read Only",
+      "keyHash": "acbd4103deb3d3a44accbd9257f8fa1c9d9b7a53ba8c085cedc7ae251be5f219",
+      "prefix": "rvk_d9bda8ab",
+      "permissions": "read",
+      "createdAt": "2026-04-14T12:29:50.169Z",
+      "lastUsed": "2026-04-14T12:29:50.170Z"
+    },
+    {
+      "id": "935d128a-3fef-4c43-bb36-4f6c55b4b8f3",
+      "name": "Write Key",
+      "keyHash": "8efa4e134da3328a47b2aa2090a0cd690a6df748f9a60b0f9756301da625e3cb",
+      "prefix": "rvk_6ffaad16",
+      "permissions": "write",
+      "createdAt": "2026-04-14T12:29:50.170Z",
+      "lastUsed": "2026-04-14T12:29:50.171Z"
+    }
+  ],
+  "setupWizardMode": "empire",
+  "setupWizardVersion": "2",
+  "publicToken": "sthfqbqjdqi08ghp3zxn07e",
+  "publicTokenExpiresAt": "2026-05-17T23:13:17.961Z",
+  "setupSuggestAuth": true
+}

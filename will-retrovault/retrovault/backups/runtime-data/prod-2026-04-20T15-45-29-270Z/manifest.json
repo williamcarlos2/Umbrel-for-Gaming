@@ -1,0 +1,30 @@
+{
+  "env": "prod",
+  "createdAt": "2026-04-20T15:45:29.293Z",
+  "sourceDir": "/home/apesch/.openclaw/workspace/retrovault/data/prod",
+  "outputDir": "/home/apesch/.openclaw/workspace/retrovault/backups/runtime-data/prod-2026-04-20T15-45-29-270Z",
+  "files": [
+    "retrovault.db",
+    "retrovault.db-shm",
+    "retrovault.db-wal",
+    "app.config.json",
+    "inventory.json",
+    "sales.json",
+    "acquisitions.json",
+    "watchlist.json",
+    "favorites.json",
+    "tags.json",
+    "goals.json",
+    "grails.json",
+    "playlog.json",
+    "events.json",
+    "whatnot.json",
+    "value-history.json",
+    "achievements-unlocked.json",
+    "scrapers.json",
+    "bug-reports.json",
+    "craigslist-deals.json",
+    "reddit-alerts.json",
+    "youtube-cache.json"
+  ]
+}

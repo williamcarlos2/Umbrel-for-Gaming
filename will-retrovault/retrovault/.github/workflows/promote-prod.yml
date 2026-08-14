@@ -1,0 +1,74 @@
+name: Promote nightly to prod
+
+on:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: nightly
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Setup env data
+        run: node scripts/setup-env-data.mjs
+
+      - name: Run tests
+        run: npm test
+
+      - name: Run build
+        run: npm run build
+
+      - name: Smoke test build artifacts
+        run: npm run smoke:release
+
+  promote:
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Fast-forward prod to nightly
+        run: |
+          git fetch origin nightly prod
+          git checkout prod || git checkout -b prod origin/prod
+          git merge --ff-only origin/nightly
+          git push origin prod
+
+  deploy-production:
+    needs: promote
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Deploy prod runtime over SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          port: ${{ secrets.DEPLOY_PORT || 22 }}
+          script: |
+            cd ${{ vars.DEPLOY_APP_DIR || '/home/apesch/.openclaw/workspace/retrovault' }}
+            bash scripts/deploy.sh prod prod
+            npm run smoke:release -- --base-url "${{ vars.PROD_PUBLIC_BASE_URL || 'https://retrovault.peschpit.com' }}" --retries 5 --retry-delay-ms 2000 --asset-limit 20

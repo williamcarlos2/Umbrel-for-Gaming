@@ -1,3 +1,5 @@
+version: "3.7"
+
 services:
 
   app_proxy:
@@ -6,7 +8,10 @@ services:
       APP_PORT: 3000
 
   retrovault:
-    image: ghcr.io/williamcarlos2/retrovault:latest
+    build:
+      context: ./retrovault
+      dockerfile: Dockerfile
+
     restart: on-failure
     stop_grace_period: 1m
 
@@ -18,3 +23,10 @@ services:
       NODE_ENV: production
       PORT: 3000
       DATABASE_URL: file:/app/data/retrovault.db
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s

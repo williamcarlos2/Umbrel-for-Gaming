@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>RetroVault</Name>
+  <Repository>ghcr.io/theretrovault/retrovault:latest</Repository>
+  <Registry>https://github.com/theretrovault/retrovault/pkgs/container/retrovault</Registry>
+  <Network>bridge</Network>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/theretrovault/retrovault/issues</Support>
+  <Project>https://github.com/theretrovault/retrovault</Project>
+  <Overview>
+    RetroVault is a self-hosted retro game collection manager for collectors, flippers, and hunters.
+    Track your inventory, pull live market prices from PriceCharting, calculate real net profit after
+    eBay fees, and use Field Mode at garage sales to instantly know what to buy and what to pass on.
+    Supports 35 platforms from Atari 2600 to Xbox Series X.
+  </Overview>
+  <Category>MediaApp:Music Tools:Other</Category>
+  <WebUI>http://[IP]:[PORT:3000]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/theretrovault/retrovault/master/docs/unraid-template.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/theretrovault/retrovault/master/retrovault/public/icons/icon.svg</Icon>
+  <ExtraParams>--restart=unless-stopped</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled/>
+  <DonateText>If RetroVault saves you money on a deal, consider supporting development.</DonateText>
+  <DonateLink>https://ko-fi.com/alexp85</DonateLink>
+  <Requires/>
+
+  <!-- Port mapping -->
+  <Config Name="WebUI Port" Target="3000" Default="3000" Mode="tcp"
+    Description="Port to access the RetroVault web interface."
+    Type="Port" Display="always" Required="true" Mask="false">3000</Config>
+
+  <!-- Volume mappings -->
+  <Config Name="Data Directory" Target="/app/data" Default="/mnt/user/appdata/retrovault/data"
+    Description="Where RetroVault stores your collection data, config, and scraped prices. Back up this folder!"
+    Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/retrovault/data</Config>
+
+  <Config Name="Logs Directory" Target="/app/logs" Default="/mnt/user/appdata/retrovault/logs"
+    Description="Scraper and application logs."
+    Type="Path" Display="advanced" Required="false" Mask="false">/mnt/user/appdata/retrovault/logs</Config>
+
+  <!-- Optional API keys -->
+  <Config Name="YouTube API Key" Target="YOUTUBE_API_KEY" Default=""
+    Description="(Optional) Free YouTube Data API v3 key from console.cloud.google.com — enables in-modal game videos."
+    Type="Variable" Display="always" Required="false" Mask="true"/>
+
+  <Config Name="GitHub Issues Token" Target="GITHUB_ISSUES_TOKEN" Default=""
+    Description="(Optional) Fine-grained GitHub token with Issues:Write — enables in-app bug reporting."
+    Type="Variable" Display="advanced" Required="false" Mask="true"/>
+</Container>

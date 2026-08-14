@@ -1,0 +1,89 @@
+name: Publish nightly image
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - nightly
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: theretrovault/retrovault
+
+jobs:
+  publish-nightly:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    env:
+      RETROVAULT_ENV: nightly
+      RETROVAULT_DATA_DIR: ${{ github.workspace }}/data/nightly
+      RETROVAULT_DB_PATH: ${{ github.workspace }}/data/nightly/retrovault.db
+      RETROVAULT_CONFIG_PATH: ${{ github.workspace }}/data/nightly/app.config.json
+      RETROVAULT_SCRAPERS_PATH: ${{ github.workspace }}/data/nightly/scrapers.json
+      DATABASE_URL: file:${{ github.workspace }}/data/nightly/retrovault.db
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Setup env data
+        run: node scripts/setup-env-data.mjs
+
+      - name: Apply Prisma migrations
+        run: npx prisma migrate deploy
+
+      - name: Generate Prisma client
+        run: npm run prisma:generate
+
+      - name: Run tests
+        run: npm test
+
+      - name: Run build
+        run: npm run build
+
+      - name: Smoke test build artifacts
+        run: npm run smoke:release
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=raw,value=nightly
+          labels: |
+            org.opencontainers.image.title=RetroVault
+            org.opencontainers.image.description=A self-hosted command center for retro game collectors.
+            org.opencontainers.image.vendor=RetroVault
+            org.opencontainers.image.licenses=MIT
+            org.opencontainers.image.version=nightly
+
+      - name: Build and push nightly Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}

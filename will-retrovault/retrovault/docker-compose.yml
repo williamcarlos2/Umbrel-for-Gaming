@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  retrovault:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: retrovault
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      # Named volumes — Docker manages permissions automatically.
+      # Your data persists across container rebuilds.
+      # To find data on disk: docker volume inspect retrovault_retrovault-data
+      # To use a bind mount instead: replace with - ./retrovault-data:/app/data
+      - retrovault-data:/app/data
+      - retrovault-logs:/app/logs
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - DATABASE_URL=file:/app/data/retrovault.db
+      # Add your API keys here (or use a .env file)
+      # - YOUTUBE_API_KEY=AIza...
+      # - GITHUB_ISSUES_TOKEN=github_pat_...
+    env_file:
+      - path: .env.local
+        required: false  # Won't fail if file doesn't exist — copy .env.example to .env.local to add API keys
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  # Optional: scheduled price fetching (remove if you don't want it)
+  price-fetcher:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: retrovault-price-fetcher
+    restart: "no"  # Managed by the cron service below
+    volumes:
+      - retrovault-data:/app/data
+      - retrovault-logs:/app/logs
+    entrypoint: ["node", "scripts/bg-fetch.mjs"]
+    profiles:
+      - cron  # Only starts with: docker compose --profile cron up
+
+  # Optional: event scraper
+  event-scraper:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: retrovault-event-scraper
+    restart: "no"
+    volumes:
+      - retrovault-data:/app/data
+      - retrovault-logs:/app/logs
+    entrypoint: ["node", "scripts/scrape-events.mjs"]
+    profiles:
+      - cron
+
+# Named volumes are managed by Docker — permissions are handled automatically.
+# Data location: docker volume inspect retrovault_retrovault-data
+# Backup: docker run --rm -v retrovault_retrovault-data:/data -v $(pwd):/backup alpine tar czf /backup/retrovault-backup.tar.gz /data
+volumes:
+  retrovault-data:
+  retrovault-logs:

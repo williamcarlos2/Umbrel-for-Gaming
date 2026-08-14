@@ -1,0 +1,440 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-pixel: "Press Start 2P", cursive;
+  --font-terminal: "VT323", monospace;
+}
+
+:root {
+  --p: #4ade80;       /* primary accent */
+  --pd: #166534;      /* primary dark / border */
+  --pg: rgba(34,197,94,0.4); /* glow */
+  --pbg: #09090b;     /* page bg */
+  --cbg: #18181b;     /* card bg */
+  --retrovault-font-scale: 1.18;
+}
+
+/* ── Color palette overrides via [data-color] on <html> ── */
+[data-color="blue"]    { --p:#60a5fa; --pd:#1e3a8a; --pg:rgba(59,130,246,0.4); --pbg:#03050e; --cbg:#0a0f1e; }
+[data-color="purple"]  { --p:#c084fc; --pd:#581c87; --pg:rgba(168,85,247,0.4); --pbg:#08030f; --cbg:#120520; }
+[data-color="amber"]   { --p:#fbbf24; --pd:#78350f; --pg:rgba(245,158,11,0.4); --pbg:#0a0800; --cbg:#18130a; }
+[data-color="magenta"] { --p:#f472b6; --pd:#831843; --pg:rgba(236,72,153,0.4); --pbg:#0d0008; --cbg:#1a000f; }
+[data-color="cyan"]    { --p:#22d3ee; --pd:#164e63; --pg:rgba(6,182,212,0.4);  --pbg:#00080a; --cbg:#00121a; }
+[data-color="red"]     { --p:#f87171; --pd:#7f1d1d; --pg:rgba(239,68,68,0.4);  --pbg:#0a0000; --cbg:#180000; }
+[data-color="gold"]    { --p:#f59e0b; --pd:#713f12; --pg:rgba(234,179,8,0.4);  --pbg:#0a0800; --cbg:#1a1200; }
+/* ── Light Mode — [data-mode="light"] on <html> ── */
+/* In light mode, swap neon accent colors for dark, readable variants per palette */
+[data-mode="light"] {
+  --pbg: #f8fafc;     /* slate-50 */
+  --cbg: #ffffff;     /* white */
+
+  /* Default (green) — swap neon green-400 → forest green-800 */
+  --p:  #166534;      /* green-800 — readable on white */
+  --pd: #14532d;      /* green-900 */
+  --pg: rgba(22,101,52,0.15);
+}
+/* Per-palette light mode overrides — dark, readable versions of each accent */
+[data-mode="light"]:not([data-color]),
+[data-mode="light"][data-color="green"]   { --p:#166534; --pd:#14532d; --pg:rgba(22,101,52,0.15); }
+[data-mode="light"][data-color="blue"]    { --p:#1d4ed8; --pd:#1e3a8a; --pg:rgba(29,78,216,0.15); }
+[data-mode="light"][data-color="purple"]  { --p:#7e22ce; --pd:#581c87; --pg:rgba(126,34,206,0.15); }
+[data-mode="light"][data-color="amber"]   { --p:#b45309; --pd:#92400e; --pg:rgba(180,83,9,0.15); }
+[data-mode="light"][data-color="magenta"] { --p:#9d174d; --pd:#831843; --pg:rgba(157,23,77,0.15); }
+[data-mode="light"][data-color="cyan"]    { --p:#0e7490; --pd:#164e63; --pg:rgba(14,116,144,0.15); }
+[data-mode="light"][data-color="red"]     { --p:#b91c1c; --pd:#7f1d1d; --pg:rgba(185,28,28,0.15); }
+[data-mode="light"][data-color="gold"]    { --p:#92400e; --pd:#78350f; --pg:rgba(146,64,14,0.15); }
+
+[data-mode="light"] body {
+  background-color: #f8fafc !important;
+  color: color-mix(in srgb, var(--p) 70%, #1a1a1a) !important;
+}
+
+/* Light mode: override dark zinc backgrounds to light equivalents */
+[data-mode="light"] .bg-black,
+[data-mode="light"] .bg-zinc-950,
+[data-mode="light"] .bg-zinc-900 {
+  background-color: #ffffff !important;
+}
+
+[data-mode="light"] .bg-zinc-950\/20,
+[data-mode="light"] .bg-zinc-900\/20 {
+  background-color: rgba(0,0,0,0.04) !important;
+}
+
+/* Light mode: page wrapper cards */
+[data-mode="light"] .border-4.border-green-500,
+[data-mode="light"] .border-4 {
+  background-color: #ffffff !important;
+}
+
+/* Light mode: text adjustments */
+[data-mode="light"] .text-zinc-300,
+[data-mode="light"] .text-zinc-400 {
+  color: #4b5563 !important; /* gray-600 */
+}
+
+[data-mode="light"] .text-zinc-500 {
+  color: #6b7280 !important; /* gray-500 */
+}
+
+[data-mode="light"] .text-zinc-600,
+[data-mode="light"] .text-zinc-700,
+[data-mode="light"] .text-zinc-800 {
+  color: #9ca3af !important; /* gray-400 */
+}
+
+/* Light mode: borders soften */
+[data-mode="light"] .border-zinc-800,
+[data-mode="light"] .border-zinc-900 {
+  border-color: #e5e7eb !important; /* gray-200 */
+}
+
+[data-mode="light"] .bg-zinc-800,
+[data-mode="light"] .bg-zinc-700 {
+  background-color: #f3f4f6 !important; /* gray-100 */
+}
+
+/* Light mode: input fields */
+[data-mode="light"] input,
+[data-mode="light"] select,
+[data-mode="light"] textarea {
+  background-color: #ffffff !important;
+  color: #1f2937 !important;
+  border-color: var(--pd) !important;
+}
+
+/* Light mode: tables */
+[data-mode="light"] table {
+  background-color: #ffffff !important;
+}
+
+[data-mode="light"] tr:hover td,
+[data-mode="light"] .hover\:bg-zinc-800:hover,
+[data-mode="light"] .hover\:bg-zinc-900:hover {
+  background-color: #f9fafb !important;
+}
+
+/* Light mode: sidebar/aside */
+[data-mode="light"] aside {
+  background-color: #f1f5f9 !important; /* slate-100 */
+  border-color: var(--pd) !important;
+}
+
+/* Light mode: green-accent bg tints */
+[data-mode="light"] .bg-green-950\/20,
+[data-mode="light"] .bg-green-900\/10 {
+  background-color: color-mix(in srgb, var(--p) 8%, transparent) !important;
+}
+
+/* Light mode: style themes that are dark-only get reset to plain white */
+[data-mode="light"] body.theme-scanline,
+[data-mode="light"] body.theme-galaxy {
+  background-image: none !important;
+  background-color: #f8fafc !important;
+  filter: none !important;
+}
+
+[data-mode="light"] body.theme-scanline::before {
+  display: none !important;
+}
+
+[data-mode="light"] body.theme-terminal {
+  background-image:
+    linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px) !important;
+  background-color: #f8fafc !important;
+}
+
+[data-mode="light"] body.theme-arcade {
+  background-color: #f0f0f0 !important;
+  background-image:
+    linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px) !important;
+}
+
+[data-mode="light"] body.theme-cartridge {
+  background-color: #faf7f0 !important; /* warm paper white */
+}
+
+/* ── Light mode style themes ── */
+body.theme-paper {
+  background-color: #fafaf9 !important;
+  background-image: none !important;
+}
+
+body.theme-blueprint {
+  background-color: #eff6ff !important; /* blue-50 */
+  background-image:
+    linear-gradient(rgba(59,130,246,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.08) 1px, transparent 1px) !important;
+  background-size: 24px 24px !important;
+}
+
+
+
+/* ── Map CSS vars to Tailwind-compatible custom properties ── */
+/* Key UI elements use these vars so themes apply everywhere */
+:root, [data-color] {
+  --color-primary: var(--p);
+  --color-primary-dark: var(--pd);
+  --color-primary-glow: var(--pg);
+  --color-bg-base: var(--pbg);
+  --color-bg-card: var(--cbg);
+}
+
+/* ── Global color application ── */
+body {
+  background-color: var(--pbg) !important;
+  color: var(--p);
+}
+
+/* Borders that should follow the theme color */
+.theme-border { border-color: var(--pd) !important; }
+.theme-text   { color: var(--p) !important; }
+.theme-glow   { box-shadow: 0 0 15px var(--pg) !important; }
+
+/* Sidebar, nav borders */
+aside { border-color: var(--pd) !important; }
+header { border-color: var(--pd) !important; }
+
+/* Key interactive border classes — override Tailwind's hardcoded green */
+.border-green-500 { border-color: var(--p) !important; }
+.border-green-800 { border-color: var(--pd) !important; }
+.border-green-900 { border-color: var(--pd) !important; }
+.border-green-700 { border-color: var(--pd) !important; }
+.text-green-400   { color: var(--p) !important; }
+.text-green-500   { color: var(--p) !important; }
+.text-green-300   { color: var(--p) !important; }
+.bg-green-500     { background-color: var(--p) !important; }
+.bg-green-600     { background-color: color-mix(in srgb, var(--p) 80%, black) !important; }
+.bg-green-700     { background-color: color-mix(in srgb, var(--p) 60%, black) !important; }
+.bg-green-900\/20 { background-color: color-mix(in srgb, var(--p) 10%, transparent) !important; }
+.shadow-\[0_0_15px_rgba\(34\,197\,94\,0\.3\)\] { box-shadow: 0 0 15px var(--pg) !important; }
+.shadow-\[0_0_10px_rgba\(34\,197\,94\,0\.3\)\] { box-shadow: 0 0 10px var(--pg) !important; }
+.drop-shadow-\[0_0_8px_rgba\(34\,197\,94\,0\.6\)\] { filter: drop-shadow(0 0 8px var(--p)) !important; }
+.drop-shadow-\[0_2px_2px_rgba\(0\,255\,0\,0\.8\)\] { filter: drop-shadow(0 2px 2px var(--p)) !important; }
+.animate-pulse.bg-green-500 { background-color: var(--p) !important; }
+
+/* ══════════════════════════════════════════════
+   STYLE THEMES — applied via body class
+   These must come AFTER @layer base to win
+   ══════════════════════════════════════════════ */
+
+/* Terminal (default) — subtle grid on dark bg */
+body.theme-terminal {
+  background-color: var(--pbg) !important;
+  background-image:
+    linear-gradient(rgba(74,222,128,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(74,222,128,0.04) 1px, transparent 1px) !important;
+  background-size: 24px 24px !important;
+}
+
+/* CRT Scanline — visible horizontal scanlines + vignette */
+body.theme-scanline {
+  background-color: var(--pbg) !important;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(0,0,0,0) 0px,
+      rgba(0,0,0,0) 3px,
+      rgba(0,0,0,0.45) 3px,
+      rgba(0,0,0,0.45) 4px
+    ) !important;
+  background-size: 100% 4px !important;
+  background-attachment: fixed !important;
+}
+body.theme-scanline::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.6) 100%);
+}
+body.theme-scanline * {
+  text-shadow: 0 0 2px var(--p);
+}
+
+/* Arcade Cabinet — bold borders, neon marquee feel */
+body.theme-arcade {
+  background-color: #0d0d0d !important;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px) !important;
+  background-size: 40px 40px !important;
+}
+body.theme-arcade aside {
+  border-right-width: 6px !important;
+  box-shadow: 4px 0 20px var(--pg), inset -2px 0 10px rgba(0,0,0,0.5) !important;
+  background: linear-gradient(180deg, #0a0a0a 0%, #111 100%) !important;
+}
+body.theme-arcade header {
+  border-bottom-width: 6px !important;
+  box-shadow: 0 4px 20px var(--pg) !important;
+}
+body.theme-arcade .bg-black,
+body.theme-arcade .bg-zinc-950 {
+  background: linear-gradient(135deg, #0a0a0a 0%, #141414 100%) !important;
+}
+body.theme-arcade .border-4 {
+  box-shadow: 0 0 12px var(--pg) !important;
+}
+
+/* Cartridge — warm beige/tan plastic aesthetic */
+body.theme-cartridge {
+  background-color: #1a1510 !important;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.01) 0px,
+      rgba(255,255,255,0.01) 1px,
+      transparent 1px,
+      transparent 8px
+    ) !important;
+  filter: none;
+}
+body.theme-cartridge aside {
+  background: linear-gradient(180deg, #1c1410 0%, #231a10 100%) !important;
+  border-color: #5c4a2a !important;
+}
+body.theme-cartridge header {
+  background: linear-gradient(90deg, #1c1410 0%, #231a10 100%) !important;
+  border-color: #5c4a2a !important;
+}
+body.theme-cartridge .bg-zinc-950 {
+  background-color: #1a1510 !important;
+}
+body.theme-cartridge .bg-black {
+  background-color: #120e0a !important;
+}
+body.theme-cartridge .border-green-500,
+body.theme-cartridge .border-green-800 {
+  border-color: #8b6914 !important;
+}
+body.theme-cartridge .text-green-400,
+body.theme-cartridge .text-green-500 {
+  color: #d4a843 !important;
+}
+
+/* Dark Galaxy — deep space with star field */
+body.theme-galaxy {
+  background-color: #020408 !important;
+  background-image:
+    radial-gradient(1px 1px at 15% 25%, rgba(255,255,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 40% 10%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 65% 80%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 80% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 25% 70%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 55% 55%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 10% 90%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 75% 65%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 35% 45%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 50% 30%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(ellipse at 30% 60%, rgba(99,102,241,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 20%, rgba(168,85,247,0.06) 0%, transparent 40%) !important;
+  background-size: auto !important;
+  background-attachment: fixed !important;
+}
+body.theme-galaxy aside {
+  background: linear-gradient(180deg, #030609 0%, #04080f 100%) !important;
+  border-color: #1e2a4a !important;
+  box-shadow: 4px 0 20px rgba(99,102,241,0.15) !important;
+}
+body.theme-galaxy .bg-zinc-950 {
+  background-color: #030609 !important;
+}
+body.theme-galaxy .bg-black {
+  background-color: #020408 !important;
+}
+
+@layer base {
+  html {
+    font-size: calc(16px * var(--retrovault-font-scale));
+  }
+
+  body {
+    /* Base styles — style themes override background via their own classes */
+    color: var(--p);
+    font-family: var(--font-pixel);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Default terminal grid — theme-terminal class applies a similar one */
+    background-color: var(--pbg);
+    background-image:
+      linear-gradient(rgba(74,222,128,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(74,222,128,0.04) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+}
+
+@layer utilities {
+  .text-xs {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  .text-\[11px\] {
+    font-size: 0.9375rem;
+    line-height: 1.25rem;
+  }
+
+  .text-\[10px\] {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+}
+
+.markdown-body h1 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  margin-bottom: 1rem;
+  color: #86efac; /* green-300 */
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.markdown-body h2 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: #86efac;
+  text-transform: uppercase;
+}
+.markdown-body h3 {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  color: #86efac;
+  text-transform: uppercase;
+}
+.markdown-body p {
+  margin-bottom: 1rem;
+  line-height: 1.625;
+  font-family: var(--font-terminal);
+  font-size: 1.25rem; /* xl */
+  letter-spacing: 0.025em;
+}
+.markdown-body ul {
+  list-style-type: disc;
+  list-style-position: inside;
+  margin-bottom: 1rem;
+  font-family: var(--font-terminal);
+  font-size: 1.25rem;
+}
+.markdown-body li {
+  margin-bottom: 0.25rem;
+}
+.markdown-body strong {
+  color: #bbf7d0; /* green-200 */
+  font-weight: 700;
+}
+.markdown-body a {
+  color: #60a5fa; /* blue-400 */
+  text-decoration: underline;
+}
+.markdown-body a:hover {
+  color: #93c5fd; /* blue-300 */
+}

@@ -1,0 +1,312 @@
+// RetroVault — Prisma SQLite Schema
+// Run `npx prisma migrate dev` to apply changes
+// Run `node scripts/migrate-to-sqlite.mjs` to import existing JSON data
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// ─── Game Inventory ───────────────────────────────────────────────────────────
+
+model Game {
+  id           String   @id
+  title        String
+  platform     String
+  status       String   @default("unowned")
+  notes        String   @default("")
+  isDigital    Boolean  @default(false)
+  source       String?
+  purchaseDate String?
+  lastFetched  DateTime?
+
+  // Current market prices (cached from last fetch)
+  marketLoose  Float?
+  marketCib    Float?
+  marketNew    Float?
+  marketGraded Float?
+
+  // Relations
+  copies       GameCopy[]
+  priceHistory PriceHistory[]
+  tags         GameTag[]
+  mentions     Mention[]      @relation("MentionGame")
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([platform])
+  @@index([lastFetched])
+  @@index([marketLoose])
+}
+
+model GameCopy {
+  id             String   @id @default(cuid())
+  gameId         String
+  game           Game     @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  condition      String   @default("Loose")
+  hasBox         Boolean  @default(false)
+  hasManual      Boolean  @default(false)
+  priceAcquired  Float    @default(0)
+  purchaseDate   String?
+  source         String?
+
+  createdAt      DateTime @default(now())
+
+  @@index([gameId])
+}
+
+model PriceHistory {
+  id        String   @id @default(cuid())
+  gameId    String
+  game      Game     @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  date      String   // YYYY-MM-DD
+  loose     Float?
+  cib       Float?
+  newPrice  Float?   @map("new")
+  graded    Float?
+  fetchedAt DateTime @default(now())
+
+  @@unique([gameId, date])
+  @@index([gameId])
+  @@index([date])
+}
+
+// ─── Critics & Social ─────────────────────────────────────────────────────────
+
+model Person {
+  id            String         @id @default(cuid())
+  name          String
+  color         String?
+  favorites     Favorite[]
+  regrets       Regret[]
+  mentions      Mention[]      @relation("MentionToPerson")
+  wishlistItems WishlistItem[]
+
+  createdAt DateTime @default(now())
+}
+
+model Favorite {
+  id       String @id @default(cuid())
+  personId String
+  gameId   String
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  @@unique([personId, gameId])
+  @@index([gameId])
+}
+
+model Regret {
+  id       String @id @default(cuid())
+  personId String
+  gameId   String
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  @@unique([personId, gameId])
+  @@index([gameId])
+}
+
+// ─── Tags & Mentions ──────────────────────────────────────────────────────────
+
+model GameTag {
+  id         String @id @default(cuid())
+  gameId     String
+  game       Game   @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  tag        String
+  entityType String @default("game") // "game" | "platform"
+
+  @@unique([gameId, tag])
+  @@index([tag])
+}
+
+model Mention {
+  id         String   @id @default(cuid())
+  gameId     String
+  game       Game     @relation("MentionGame", fields: [gameId], references: [id], onDelete: Cascade)
+  toPersonId String
+  toPerson   Person   @relation("MentionToPerson", fields: [toPersonId], references: [id], onDelete: Cascade)
+  fromPerson String
+  message    String
+  entityType String   @default("game")
+  entityName String
+
+  createdAt  DateTime @default(now())
+
+  @@index([toPersonId])
+  @@index([gameId])
+}
+
+// ─── Business / P&L ───────────────────────────────────────────────────────────
+
+model Sale {
+  id          String   @id @default(cuid())
+  gameId      String?
+  gameTitle   String
+  platform    String?
+  salePrice   Float
+  saleDate    String
+  condition   String?
+  notes       String?
+  source      String?
+
+  createdAt   DateTime @default(now())
+}
+
+model Acquisition {
+  id           String   @id @default(cuid())
+  gameId       String?
+  gameTitle    String
+  platform     String?
+  cost         Float
+  purchaseDate String
+  source       String?
+  notes        String?
+
+  createdAt    DateTime @default(now())
+}
+
+model WatchlistItem {
+  id          String  @id @default(cuid())
+  gameId      String?
+  title       String
+  platform    String
+  alertPrice  Float
+  notes       String?
+
+  createdAt   DateTime @default(now())
+}
+
+// ─── Collection Tools ─────────────────────────────────────────────────────────
+
+model Grail {
+  id          String    @id @default(cuid())
+  title       String
+  platform    String?
+  notes       String?
+  priority    Int       @default(2) // 1=must have, 2=want, 3=someday
+  acquiredAt  DateTime?
+
+  createdAt   DateTime  @default(now())
+}
+
+model PlayLogEntry {
+  id          String   @id @default(cuid())
+  title       String
+  platform    String
+  status      String   // playing|beat|gave_up|want_to_play|backlog
+  rating      Int?     // 1-5
+  notes       String?
+  startedAt   DateTime?
+  finishedAt  DateTime?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model CollectionGoal {
+  id          String @id @default(cuid())
+  platform    String @unique
+  priority    Int    @default(2)
+  targetCount Int?
+
+  updatedAt   DateTime @updatedAt
+}
+
+// ─── Events & Whatnot ─────────────────────────────────────────────────────────
+
+model Event {
+  id          String   @id @default(cuid())
+  title       String
+  dateRaw     String
+  date        String?
+  location    String   @default("")
+  venue       String?
+  url         String?
+  source      String   @default("manual")
+  description String?
+  attending   Boolean  @default(false)
+  interested  Boolean  @default(false)
+  notes       String?
+
+  scrapedAt   DateTime @default(now())
+}
+
+model WhatnotSeller {
+  id            String @id @default(cuid())
+  username      String @unique
+  displayName   String
+  specialty     String @default("")
+  twitterUrl    String?
+  instagramUrl  String?
+  notes         String?
+  notifyBefore  Int    @default(30)
+
+  createdAt     DateTime @default(now())
+}
+
+model WhatnotStream {
+  id            String   @id @default(cuid())
+  seller        String
+  title         String
+  startTime     DateTime?
+  scheduledText String?
+  url           String
+  source        String   @default("manual")
+  attending     Boolean  @default(false)
+
+  createdAt     DateTime @default(now())
+}
+
+// ─── Value History ────────────────────────────────────────────────────────────
+
+model ValueSnapshot {
+  id         String @id @default(cuid())
+  date       String @unique // YYYY-MM-DD
+  totalValue Float
+  totalCib   Float
+  totalPaid  Float
+  gameCount  Int
+
+  createdAt  DateTime @default(now())
+}
+
+// ─── Wishlist ──────────────────────────────────────────────────────────────────
+
+model WishlistItem {
+  id          String    @id @default(cuid())
+  title       String
+  platform    String
+  gameId      String?
+  playerId    String?
+  player      Person?   @relation(fields: [playerId], references: [id], onDelete: SetNull)
+  priority    Int       @default(2) // 1=must-have 2=want 3=someday
+  notes       String?
+  marketLoose Float?
+  marketCib   Float?
+  marketNew   Float?
+  marketGraded Float?
+  lastFetched DateTime?
+  addedAt     DateTime  @default(now())
+  foundAt     DateTime?
+
+  @@index([priority])
+  @@index([playerId])
+}
+
+model WishlistShare {
+  id        String   @id @default(cuid())
+  token     String   @unique @default(cuid())
+  label     String   @default("My Wishlist")
+  createdAt DateTime @default(now())
+}
+
+model CollectionShare {
+  id        String    @id @default(cuid())
+  token     String    @unique @default(cuid())
+  label     String    @default("My Collection")
+  expiresAt DateTime?
+  createdAt DateTime  @default(now())
+}

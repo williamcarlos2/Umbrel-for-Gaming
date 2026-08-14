@@ -1,0 +1,80 @@
+# RetroVault - nginx reverse proxy config
+# 
+# Place this inside your nginx server block or include it.
+# Replace retrovault.local (or your chosen domain/hostname) throughout.
+#
+# If you're using an existing nginx reverse proxy setup, 
+# just add this server block to your sites-available.
+
+# ─── HTTP → HTTPS redirect (if using SSL) ───────────────────────────────────
+# server {
+#     listen 80;
+#     server_name retrovault.local;
+#     return 301 https://$host$request_uri;
+# }
+
+# ─── Main server block ───────────────────────────────────────────────────────
+server {
+    listen 80;
+    # listen 443 ssl;  # Uncomment if using SSL
+    server_name retrovault.local;  # Change to your domain or LAN hostname
+
+    # SSL config (uncomment if using certs)
+    # ssl_certificate     /etc/nginx/ssl/retrovault.crt;
+    # ssl_certificate_key /etc/nginx/ssl/retrovault.key;
+    # ssl_protocols       TLSv1.2 TLSv1.3;
+    # ssl_ciphers         HIGH:!aNULL:!MD5;
+
+    # Logs
+    access_log /var/log/nginx/retrovault.access.log;
+    error_log  /var/log/nginx/retrovault.error.log;
+
+    # Max upload size (for CSV import)
+    client_max_body_size 50M;
+
+    # ── Static Next.js assets — serve directly for performance ──────────────
+    location /_next/static/ {
+        alias /path/to/retrovault/.next/static/;
+        expires 1y;
+        access_log off;
+        add_header Cache-Control "public, immutable";
+    }
+
+    # ── Public files ─────────────────────────────────────────────────────────
+    location /public/ {
+        alias /path/to/retrovault/public/;
+        expires 7d;
+        access_log off;
+    }
+
+    # ── PWA manifest ─────────────────────────────────────────────────────────
+    location /manifest.json {
+        alias /path/to/retrovault/public/manifest.json;
+        add_header Content-Type application/manifest+json;
+    }
+
+    # ── Everything else → Next.js app ────────────────────────────────────────
+    location / {
+        proxy_pass         http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+
+        # Required for Next.js WebSocket (HMR in dev, not needed in prod but harmless)
+        proxy_set_header   Upgrade $http_upgrade;
+        proxy_set_header   Connection 'upgrade';
+
+        # Pass real client info
+        proxy_set_header   Host              $host;
+        proxy_set_header   X-Real-IP         $remote_addr;
+        proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Proto $scheme;
+
+        # Timeouts (scrapers can take a while)
+        proxy_connect_timeout  60s;
+        proxy_send_timeout     120s;
+        proxy_read_timeout     120s;
+
+        # Don't cache API responses
+        proxy_cache_bypass $http_upgrade;
+        add_header X-Proxied-By nginx;
+    }
+}

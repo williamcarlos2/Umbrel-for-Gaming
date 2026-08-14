@@ -1,0 +1,24 @@
+# Build artifacts
+.next/
+node_modules/
+
+# Personal data — never goes in the image
+data/*.json
+!data/sample/
+
+# Logs
+logs/
+
+# Secrets
+.env.local
+.env
+
+# Dev files
+.git/
+*.md
+__tests__/
+coverage/
+
+# OS artifacts
+.DS_Store
+Thumbs.db

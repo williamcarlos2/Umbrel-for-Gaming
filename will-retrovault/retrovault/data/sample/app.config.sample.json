@@ -1,0 +1,24 @@
+{
+  "appName": "RetroVault",
+  "tagline": "Your Retro Gaming Collection Engine",
+  "ownerName": "Your Name",
+  "themeColor": "green",
+  "currency": "$",
+  "dateFormat": "US",
+  "publicUrl": "",
+  "standaloneMode": true,
+  "auth": { "enabled": false, "passwordHash": "" },
+  "plex": { "url": "", "token": "" },
+  "fetchScheduleHour": 0,
+  "priceDataSource": "pricecharting",
+  "scrapers": { "craigslistCity": "portland" },
+  "features": {
+    "business": true, "fieldTools": true, "social": true,
+    "personal": true, "media": false
+  },
+  "platforms": [
+    "NES","SNES","Nintendo 64","Gamecube","Nintendo Switch",
+    "Sega Genesis","Sega CD","Dreamcast",
+    "PS1","PS2","PS3","PSP","Xbox","Xbox 360"
+  ]
+}
