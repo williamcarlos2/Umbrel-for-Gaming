@@ -1,16 +1,22 @@
 manifestVersion: 1
 id: will-retrovault
 name: retrovault
-tagline: Replace this tagline with your app's tagline
-icon: https://svgur.com/i/mvA.svg
+tagline: É um sistema voltado para colecionadores de videogames, funcionando como um inventário digital da coleção. Ele permite
+icon: https://play-lh.googleusercontent.com/Zkw5uFYUtGhoDtwL8gp801rI_iuBLXfn3JEWEVjo_6Bcn6o7S5RXfuL7VT85yj3Vkvapdi_NSeo8VRtjcJBuofU=w240-h480-rw
 category: Development
 version: "1.0.0"
-port: 4000
+port: 3000
 description: >-
-  Add your app's description here.
+  É um sistema voltado para colecionadores de videogames, funcionando como um inventário digital da coleção. Ele permite:
 
-
-  You can also add newlines!
+🎮 Cadastrar jogos por plataforma
+📦 Controlar se possui caixa, manual e cartucho/disco
+📸 Adicionar fotos dos seus itens
+🔎 Pesquisar e filtrar a coleção
+❤️ Criar uma wishlist
+📱 Digitalizar jogos através de fotos usando reconhecimento por IA
+🏛️ Visualizar a coleção como uma espécie de "museu"
+📊 Organizar e acompanhar sua coleção física
 
 developer: Umbrel
 website: https://umbrel.com
