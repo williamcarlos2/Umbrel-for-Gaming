@@ -4,7 +4,7 @@ name: RetroVault
 tagline: Gerencie sua coleção física de videogames
 icon: https://play-lh.googleusercontent.com/Zkw5uFYUtGhoDtwL8gp801rI_iuBLXfn3JEWEVjo_6Bcn6o7S5RXfuL7VT85yj3Vkvapdi_NSeo8VRtjcJBuofU=w240-h480-rw
 category: Development
-version: "1.0.0"
+version: "1.0.2"
 
 description: >-
   Sistema self-hosted para gerenciamento e inventário de coleções

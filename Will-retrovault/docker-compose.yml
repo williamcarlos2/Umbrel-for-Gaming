@@ -8,7 +8,7 @@ services:
       APP_PORT: 3000
 
   retrovault:
-    image: ghcr.io/williamcarlos2/retrovault:latest
+    image: ghcr.io/theretrovault/retrovault
     restart: on-failure
     stop_grace_period: 1m
 
