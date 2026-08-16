@@ -1,32 +1,28 @@
 manifestVersion: 1
 id: will-retrovault
+category: media
 name: RetroVault
-tagline: Gerencie sua coleção física de videogames
-icon: https://play-lh.googleusercontent.com/Zkw5uFYUtGhoDtwL8gp801rI_iuBLXfn3JEWEVjo_6Bcn6o7S5RXfuL7VT85yj3Vkvapdi_NSeo8VRtjcJBuofU=w240-h480-rw
-category: Development
-version: "1.0.5"
-
+version: "1.0.0"
+tagline: Self-hosted retro game collection manager
 description: >-
-  Sistema self-hosted para gerenciamento e inventário de coleções
-  de videogames, consoles e itens relacionados.
+  RetroVault is a self-hosted command center for retro game collectors.
+  Track your games, collection value, purchase history, condition and
+  market prices in one place.
 
-developer: William Carlos
-website: https://github.com/williamcarlos2/Umbrel-for-Gaming
-submitter: William Carlos
+  It includes collection management, wishlist tracking, play logs,
+  price tracking, flip calculations, field tools, achievements and
+  multiple retro gaming platforms.
 
-repo: https://github.com/williamcarlos2/Umbrel-for-Gaming
-
-support: https://github.com/williamcarlos2/Umbrel-for-Gaming/issues
-
-gallery: []
-
-releaseNotes: ""
-
+developer: The RetroVault Team
+website: https://github.com/theretrovault/retrovault
 dependencies: []
-
+repo: https://github.com/theretrovault/retrovault
+support: https://github.com/theretrovault/retrovault/issues
 port: 3000
-
+gallery: []
 path: ""
-
 defaultUsername: ""
 defaultPassword: ""
+deterministicPassword: false
+submitter: Umbrel
+submission: https://github.com/getumbrel/umbrel-apps
