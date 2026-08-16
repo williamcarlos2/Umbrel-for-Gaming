@@ -4,14 +4,11 @@ services:
 
   app_proxy:
     environment:
-      APP_HOST: will-retrovault_retrovault_1
+      APP_HOST: retrovault
       APP_PORT: 3000
 
   retrovault:
-    build:
-      context: ./retrovault
-      dockerfile: Dockerfile
-
+    image: ghcr.io/williamcarlos2/retrovault:latest
     restart: on-failure
     stop_grace_period: 1m
 
