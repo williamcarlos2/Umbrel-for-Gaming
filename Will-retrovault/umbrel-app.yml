@@ -1,9 +1,10 @@
 manifestVersion: 1
-id: retrovault
+id: will-retrovault
 category: media
 name: RetroVault
 version: "1.0.0"
 tagline: Self-hosted retro game collection manager
+icon: https://github.com/williamcarlos2/Umbrel-for-Gaming/blob/main/will-retrovault/img/icone.jpg
 description: >-
   RetroVault is a self-hosted command center for retro game collectors.
   Track your games, collection value, purchase history, condition and
@@ -19,7 +20,10 @@ dependencies: []
 repo: https://github.com/theretrovault/retrovault
 support: https://github.com/theretrovault/retrovault/issues
 port: 3000
-gallery: []
+gallery:
+  - https://github.com/williamcarlos2/Umbrel-for-Gaming/blob/main/will-retrovault/img/001.jpg
+  - https://github.com/williamcarlos2/Umbrel-for-Gaming/blob/main/will-retrovault/img/002.jpg
+
 path: ""
 defaultUsername: ""
 defaultPassword: ""
