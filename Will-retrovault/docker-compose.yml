@@ -4,7 +4,7 @@ services:
 
   app_proxy:
     environment:
-      APP_HOST: will-retrovault_retrovault_1
+      APP_HOST: retrovault_retrovault_1
       APP_PORT: 3000
 
   retrovault:
