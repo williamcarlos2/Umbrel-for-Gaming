@@ -1,0 +1,116 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: will-obico_web_1
+      APP_PORT: 3334
+      PROXY_AUTH_ADD: false
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: web
+    restart: unless-stopped
+    stop_grace_period: 30s
+    depends_on:
+      - ml_api
+      - redis
+    environment:
+      OCTOPRINT_TUNNEL_PORT_RANGE: "0-0"
+      DEBUG: "False"
+      SITE_USES_HTTPS: "False"
+      SITE_IS_PUBLIC: "False"
+      ACCOUNT_ALLOW_SIGN_UP: "True"
+      WEBPACK_LOADER_ENABLED: "False"
+      REDIS_URL: "redis://redis:6379"
+      DATABASE_URL: "sqlite:////data/db.sqlite3"
+      INTERNAL_MEDIA_HOST: "http://web:3334"
+      ML_API_HOST: "http://ml_api:3333"
+      DJANGO_SECRET_KEY: "${DJANGO_SECRET_KEY:-change-this-secret-key}"
+      EMAIL_HOST: "${EMAIL_HOST:-}"
+      EMAIL_HOST_USER: "${EMAIL_HOST_USER:-}"
+      EMAIL_HOST_PASSWORD: "${EMAIL_HOST_PASSWORD:-}"
+      EMAIL_PORT: "${EMAIL_PORT:-587}"
+      EMAIL_USE_TLS: "${EMAIL_USE_TLS:-True}"
+      DEFAULT_FROM_EMAIL: "${DEFAULT_FROM_EMAIL:-obico@localhost}"
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+      - ${APP_DATA_DIR}/media:/app/static_build/media
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py collectstatic -v 2 --noinput &&
+             daphne -b 0.0.0.0 -p 3334 config.routing:application"
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider --no-check-certificate http://127.0.0.1:3334/hc/ || exit 1"]
+      start_period: 90s
+      interval: 60s
+      timeout: 20s
+      retries: 5
+
+  tasks:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: web
+    restart: unless-stopped
+    depends_on:
+      - web
+      - redis
+      - ml_api
+    environment:
+      OCTOPRINT_TUNNEL_PORT_RANGE: "0-0"
+      DEBUG: "False"
+      REDIS_URL: "redis://redis:6379"
+      DATABASE_URL: "sqlite:////data/db.sqlite3"
+      INTERNAL_MEDIA_HOST: "http://web:3334"
+      ML_API_HOST: "http://ml_api:3333"
+      DJANGO_SECRET_KEY: "${DJANGO_SECRET_KEY:-change-this-secret-key}"
+      EMAIL_HOST: "${EMAIL_HOST:-}"
+      EMAIL_HOST_USER: "${EMAIL_HOST_USER:-}"
+      EMAIL_HOST_PASSWORD: "${EMAIL_HOST_PASSWORD:-}"
+      EMAIL_PORT: "${EMAIL_PORT:-587}"
+      EMAIL_USE_TLS: "${EMAIL_USE_TLS:-True}"
+      DEFAULT_FROM_EMAIL: "${DEFAULT_FROM_EMAIL:-obico@localhost}"
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+      - ${APP_DATA_DIR}/media:/app/static_build/media
+    command: >
+      sh -c "celery -A config worker --beat -l info -c 2 -Q realtime,celery"
+    healthcheck:
+      test: ["CMD-SHELL", "celery -A config inspect ping"]
+      start_period: 30s
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  ml_api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: ml_api
+    restart: unless-stopped
+    environment:
+      DEBUG: "False"
+      FLASK_APP: "server.py"
+    command: >
+      bash -c "gunicorn --bind 0.0.0.0:3333 --workers 1 wsgi"
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider --no-check-certificate http://127.0.0.1:3333/hc/ || exit 1"]
+      start_period: 90s
+      interval: 30s
+      timeout: 15s
+      retries: 5
+
+  redis:
+    image: redis:7.2-alpine
+    restart: unless-stopped
+    volumes:
+      - ${APP_DATA_DIR}/redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      start_period: 15s
+      interval: 15s
+      timeout: 10s
+      retries: 20
