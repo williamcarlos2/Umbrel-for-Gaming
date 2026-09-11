@@ -1,19 +1,38 @@
 manifestVersion: 1
+
 id: will-obico
 name: Obico
 tagline: Detecção inteligente de falhas para impressoras 3D
+
 category: utilities
 version: "1.0.0"
+
 description: >-
-  Servidor Obico self-hosted para monitoramento de impressoras 3D,
-  integração com OctoPrint e detecção por IA de falhas de impressão.
+  Transforme sua impressora 3D em uma impressora inteligente.
+  O Obico monitora suas impressões, detecta falhas automaticamente
+  usando inteligência artificial e permite acompanhar suas impressoras
+  remotamente. Compatível com OctoPrint e outras plataformas.
+
 developer: The Obico Team
 website: https://www.obico.ai
 repo: https://github.com/TheSpaghettiDetective/obico-server
 support: https://github.com/TheSpaghettiDetective/obico-server/issues
+
 submitter: William
+
 dependencies: []
+
 port: 3334
-icon: https://raw.githubusercontent.com/TheSpaghettiDetective/obico-server/release/website/static/img/favicon.ico
+
+icon: icon.jpg
+
+gallery:
+  - Screen001.jpg
+  - Screen002.jpg
+  - Screen003.jpg
+
 releaseNotes: >-
-  Primeira versão empacotada para UmbrelOS.
+  Primeira versão do Obico empacotada para UmbrelOS.
+  Inclui servidor Obico self-hosted, detecção de falhas
+  por inteligência artificial, integração com OctoPrint
+  e monitoramento das impressões.
