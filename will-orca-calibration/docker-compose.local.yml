@@ -1,0 +1,12 @@
+version: "3.7"
+
+services:
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: orca-calibration:local
+    restart: on-failure
+    ports:
+      - "8080:80"

@@ -1,0 +1,34 @@
+manifestVersion: 1
+
+id: will-orca-calibration
+name: Orca Calibration
+tagline: Ferramentas de calibração para OrcaSlicer
+category: utilities
+
+version: "1.0.0"
+
+description: >-
+  Suite web de ferramentas para calibração de impressoras 3D,
+  focada em OrcaSlicer. Inclui temperatura, flow, YOLO,
+  pressure advance, retração, velocidade volumétrica máxima
+  e recomendações de configurações.
+
+developer: flight505
+website: https://github.com/flight505/CalibrationTool
+repo: https://github.com/flight505/CalibrationTool
+
+support: https://github.com/flight505/CalibrationTool/issues
+
+submitter: William
+
+dependencies: []
+
+port: 80
+
+gallery:
+  - https://raw.githubusercontent.com/flight505/CalibrationTool/main/public/og-image.png
+
+icon: https://raw.githubusercontent.com/flight505/CalibrationTool/main/public/favicon.ico
+
+releaseNotes: >-
+  Primeira versão empacotada para UmbrelOS.

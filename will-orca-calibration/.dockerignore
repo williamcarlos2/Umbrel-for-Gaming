@@ -1,0 +1,7 @@
+.git
+.github
+README.md
+docker-compose*.yml
+umbrel-app.yml
+exports.sh
+icon.svg
