@@ -1,41 +1,33 @@
 name: Build Obico
-
 on:
   workflow_dispatch:
-
 permissions:
   contents: read
   packages: write
-
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Login to GHCR
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build and push Obico Web
+      - name: Build web image
         uses: docker/build-push-action@v6
         with:
-          context: ./will-obico
-          file: ./will-obico/Dockerfile
+          context: .
+          file: ./Dockerfile
           target: web
           push: true
           tags: ghcr.io/williamcarlos2/will-obico-web:latest
-
-      - name: Build and push Obico ML
+      - name: Build ML image
         uses: docker/build-push-action@v6
         with:
-          context: ./will-obico
-          file: ./will-obico/Dockerfile
+          context: .
+          file: ./Dockerfile
           target: ml_api
           push: true
           tags: ghcr.io/williamcarlos2/will-obico-ml:latest
