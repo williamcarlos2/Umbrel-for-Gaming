@@ -24,12 +24,12 @@ dependencies: []
 
 port: 3334
 
-icon: icon.jpg
+icon: https://github.com/williamcarlos2/Umbrel-for-Gaming/blob/main/will-obico/img/icon.jpg
 
 gallery:
-  - Screen001.jpg
-  - Screen002.jpg
-  - Screen003.jpg
+  - https://github.com/williamcarlos2/Umbrel-for-Gaming/blob/main/will-obico/img/Screen001.jpg
+  - https://github.com/williamcarlos2/Umbrel-for-Gaming/blob/main/will-obico/img/Screen002.jpg
+  - https://github.com/williamcarlos2/Umbrel-for-Gaming/blob/main/will-obico/img/Screen003.jpg
 
 releaseNotes: >-
   Primeira versão do Obico empacotada para UmbrelOS.
