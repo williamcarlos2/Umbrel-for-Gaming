@@ -24,13 +24,12 @@ dependencies: []
 
 port: 3334
 
-icon: https://github.com/williamcarlos2/Umbrel-for-Gaming/blob/main/will-obico/img/icon.jpg
+icon: https://raw.githubusercontent.com/williamcarlos2/Umbrel-for-Gaming/refs/heads/main/will-obico/img/icon.jpg
 
 gallery:
-  - https://github.com/williamcarlos2/Umbrel-for-Gaming/blob/main/will-obico/img/Screen001.jpg
-  - https://github.com/williamcarlos2/Umbrel-for-Gaming/blob/main/will-obico/img/Screen002.jpg
-  - https://github.com/williamcarlos2/Umbrel-for-Gaming/blob/main/will-obico/img/Screen003.jpg
-
+  - https://raw.githubusercontent.com/williamcarlos2/Umbrel-for-Gaming/refs/heads/main/will-obico/img/Screen001.jpg
+  - https://raw.githubusercontent.com/williamcarlos2/Umbrel-for-Gaming/refs/heads/main/will-obico/img/Screen002.jpg
+  - https://raw.githubusercontent.com/williamcarlos2/Umbrel-for-Gaming/refs/heads/main/will-obico/img/Screen003.jpg
 releaseNotes: >-
   Primeira versão do Obico empacotada para UmbrelOS.
   Inclui servidor Obico self-hosted, detecção de falhas
