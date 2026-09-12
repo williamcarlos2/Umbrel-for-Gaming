@@ -3,16 +3,14 @@ id: will-printstash
 category: utilities
 name: PrintStash
 version: "0.13.0"
-tagline: Organize seus modelos, G-codes e impressões 3D
-icon: https://raw.githubusercontent.com/xiao-villamor/PrintStash/v0.13.0/icon.svg
+tagline: Organize seus arquivos de impressão 3D
+icon: icon.svg
 description: >-
-  PrintStash é uma biblioteca self-hosted para arquivos de impressão 3D.
-  Organize STL, 3MF, OBJ, STEP, G-code e metadados do slicer,
-  visualize modelos, acompanhe revisões, custos e histórico de impressão.
+  Biblioteca self-hosted para modelos 3D, G-code, metadados do slicer,
+  revisões, histórico de impressão e gerenciamento de impressoras.
 developer: xiao-villamor
-website: https://www.printstash.org
+website: https://printstash.org
 repo: https://github.com/xiao-villamor/PrintStash
 support: https://github.com/xiao-villamor/PrintStash/issues
-dependencies: []
 port: 8182
 gallery: []
