@@ -1,18 +1,13 @@
-# LayerNexus — Umbrel custom app
+# LayerNexus para Umbrel
 
-Experimental package for `williamcarlos2/Umbrel-for-Gaming`.
+Versão experimental para o repositório Umbrel-for-Gaming.
 
-## Included
-- LayerNexus web + worker, built directly from upstream GitHub.
-- OrcaSlicer API container.
-- Uses the existing Spoolman on Umbrel at port 7912.
-- Umbrel app proxy on port 8000 internally.
+- Porta interna do LayerNexus: 8000
+- Não expõe `8000:8000` no host; o acesso é feito pelo `app_proxy` do Umbrel.
+- O Spoolman existente é usado em `host.docker.internal:7912`.
+- OrcaSlicer API roda no container separado.
+- O código do LayerNexus é baixado durante o build da imagem.
 
-## Important
-This package intentionally does NOT install a second Spoolman instance.
+## Importante
 
-If your Spoolman is not reachable at host port 7912, change `SPOOLMAN_URL`
-in docker-compose.yml before installing.
-
-Upstream project:
-https://github.com/peterus/LayerNexus
+A porta `8000` não precisa estar livre no host quando o app usa `app_proxy`. O `port` do `umbrel-app.yml` deve corresponder à porta interna da aplicação (8000).

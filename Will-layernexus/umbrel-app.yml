@@ -3,9 +3,8 @@ id: will-layernexus
 name: LayerNexus
 tagline: Central de controle para seu fluxo de impressão 3D
 icon: https://raw.githubusercontent.com/peterus/LayerNexus/main/static/favicon-180.png
-category: Development
-version: "0.1.0"
-port: 8001
+category: utilities
+version: "0.1.1"
 description: >-
   LayerNexus é um gerenciador de projetos de impressão 3D que integra
   OrcaSlicer, Klipper/Moonraker e Spoolman. Organize STL, projetos,
@@ -17,9 +16,8 @@ submission: https://github.com/williamcarlos2/Umbrel-for-Gaming
 repo: https://github.com/peterus/LayerNexus
 support: https://github.com/peterus/LayerNexus/issues
 releaseNotes: >-
-  Primeira versão experimental para a loja personalizada do Umbrel.
-  Integração com Spoolman existente e serviço OrcaSlicer API incluído.
-dependencies:
-  path: ""
+  Versão experimental para Umbrel. Usa Spoolman existente e OrcaSlicer API.
+dependencies: []
+path: ""
 defaultUsername: ""
 defaultPassword: ""
