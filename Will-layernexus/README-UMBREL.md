@@ -1,13 +1,18 @@
 # LayerNexus para Umbrel
 
-Versão experimental para o repositório Umbrel-for-Gaming.
+Versão experimental para Umbrel-for-Gaming.
 
-- Porta interna do LayerNexus: 8000
-- Não expõe `8000:8000` no host; o acesso é feito pelo `app_proxy` do Umbrel.
-- O Spoolman existente é usado em `host.docker.internal:7912`.
-- OrcaSlicer API roda no container separado.
-- O código do LayerNexus é baixado durante o build da imagem.
+- Porta interna: 8000
+- Acesso pelo app_proxy do Umbrel.
+- Não publica 8000 no host.
+- Usa o Spoolman existente em `host.docker.internal:7912`.
+- OrcaSlicer API roda em container separado.
+- Dados persistentes ficam em `${APP_DATA_DIR}/data/`.
 
-## Importante
+## Permissões
 
-A porta `8000` não precisa estar livre no host quando o app usa `app_proxy`. O `port` do `umbrel-app.yml` deve corresponder à porta interna da aplicação (8000).
+O container cria explicitamente `appuser` com UID 100 e `appgroup` com GID 101.
+Isso corrige o erro SQLite `unable to open database file` encontrado durante o teste.
+
+Para teste direto fora do app_proxy, use um compose separado com `8001:8000`.
+Esse mapeamento não deve ser usado no compose da loja.

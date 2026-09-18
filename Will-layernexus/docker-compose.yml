@@ -1,13 +1,13 @@
 version: "3.7"
-
 services:
   app_proxy:
     environment:
       APP_HOST: will-layernexus_web_1
       APP_PORT: 8000
+    container_name: will-layernexus_app_proxy_1
 
   web:
-    image: will-layernexus:0.1.1
+    image: will-layernexus:0.1.2
     build:
       context: .
     restart: on-failure
@@ -29,7 +29,7 @@ services:
       - orcaslicer
 
   worker:
-    image: will-layernexus:0.1.1
+    image: will-layernexus:0.1.2
     restart: on-failure
     stop_grace_period: 1m
     entrypoint: []
