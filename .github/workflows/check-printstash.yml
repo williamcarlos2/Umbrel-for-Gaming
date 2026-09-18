@@ -1,0 +1,219 @@
+name: Check PrintStash release
+
+on:
+  schedule:
+    # Executa todos os dias às 09:00 UTC
+    - cron: "0 9 * * *"
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  check-printstash:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get latest PrintStash release
+        id: release
+        shell: bash
+        run: |
+          set -e
+
+          LATEST_TAG=$(curl -fsSL \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/xiao-villamor/PrintStash/releases/latest \
+            | jq -r '.tag_name')
+
+          if [ -z "$LATEST_TAG" ] || [ "$LATEST_TAG" = "null" ]; then
+            echo "Não foi possível descobrir a última release."
+            exit 1
+          fi
+
+          VERSION="${LATEST_TAG#v}"
+
+          echo "Latest tag: $LATEST_TAG"
+          echo "Version: $VERSION"
+
+          echo "tag=$LATEST_TAG" >> "$GITHUB_OUTPUT"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Detect current PrintStash version
+        id: current
+        shell: bash
+        run: |
+          set -e
+
+          COMPOSE_FILE="will-printstash/docker-compose.yml"
+          MANIFEST_FILE="will-printstash/umbrel-app.yml"
+
+          if [ ! -f "$COMPOSE_FILE" ]; then
+            echo "Arquivo não encontrado: $COMPOSE_FILE"
+            exit 1
+          fi
+
+          CURRENT=$(grep \
+            'ghcr.io/xiao-villamor/printstash-frontend:' \
+            "$COMPOSE_FILE" \
+            | head -1 \
+            | sed -E 's/.*printstash-frontend:([0-9.]+).*/\1/')
+
+          if [ -z "$CURRENT" ]; then
+            echo "Não foi possível descobrir a versão atual."
+            exit 1
+          fi
+
+          echo "Current version: $CURRENT"
+
+          echo "version=$CURRENT" >> "$GITHUB_OUTPUT"
+
+      - name: Compare versions
+        id: compare
+        shell: bash
+        env:
+          CURRENT: ${{ steps.current.outputs.version }}
+          LATEST: ${{ steps.release.outputs.version }}
+        run: |
+          python3 <<'PY'
+          import os
+          import re
+
+          current = os.environ["CURRENT"]
+          latest = os.environ["LATEST"]
+
+          def parse(v):
+              match = re.fullmatch(r"(\d+)\.(\d+)\.(\d+)", v)
+              if not match:
+                  raise SystemExit(f"Versão inválida: {v}")
+              return tuple(map(int, match.groups()))
+
+          current_v = parse(current)
+          latest_v = parse(latest)
+
+          print(f"Atual:  {current_v}")
+          print(f"Nova:   {latest_v}")
+
+          if latest_v > current_v:
+              print("Nova versão encontrada.")
+              with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+                  f.write("update=true\n")
+          else:
+              print("Nenhuma atualização necessária.")
+              with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+                  f.write("update=false\n")
+          PY
+
+      - name: Update PrintStash version
+        if: steps.compare.outputs.update == 'true'
+        env:
+          VERSION: ${{ steps.release.outputs.version }}
+          TAG: ${{ steps.release.outputs.tag }}
+        shell: bash
+        run: |
+          set -e
+
+          COMPOSE_FILE="will-printstash/docker-compose.yml"
+          MANIFEST_FILE="will-printstash/umbrel-app.yml"
+
+          echo "Atualizando PrintStash para $VERSION"
+
+          # Atualiza as imagens Docker
+          sed -i -E \
+            "s|(ghcr\.io/xiao-villamor/printstash-frontend:)[0-9.]+|\1${VERSION}|g" \
+            "$COMPOSE_FILE"
+
+          sed -i -E \
+            "s|(ghcr\.io/xiao-villamor/printstash-api-lite:)[0-9.]+|\1${VERSION}|g" \
+            "$COMPOSE_FILE"
+
+          # Atualiza a versão do aplicativo Umbrel
+          sed -i -E \
+            "s/^version: .*/version: \"${VERSION}\"/" \
+            "$MANIFEST_FILE"
+
+          # Atualiza o ícone para usar a tag correspondente
+          sed -i -E \
+            "s|PrintStash/v[0-9.]+/icon\.svg|PrintStash/${TAG}/icon.svg|g" \
+            "$MANIFEST_FILE"
+
+          echo
+          echo "===== Alterações ====="
+          git diff -- "$COMPOSE_FILE" "$MANIFEST_FILE"
+
+      - name: Verify Docker images
+        if: steps.compare.outputs.update == 'true'
+        env:
+          VERSION: ${{ steps.release.outputs.version }}
+        shell: bash
+        run: |
+          set -e
+
+          echo "Verificando imagens da versão $VERSION..."
+
+          docker manifest inspect \
+            "ghcr.io/xiao-villamor/printstash-frontend:${VERSION}" \
+            > /dev/null
+
+          docker manifest inspect \
+            "ghcr.io/xiao-villamor/printstash-api-lite:${VERSION}" \
+            > /dev/null
+
+          echo "Imagens encontradas com sucesso."
+
+      - name: Create Pull Request
+        if: steps.compare.outputs.update == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+          branch: automation/printstash-${{ steps.release.outputs.version }}
+
+          delete-branch: true
+
+          commit-message: >
+            chore(printstash): update to v${{ steps.release.outputs.version }}
+
+          title: >
+            Update PrintStash to v${{ steps.release.outputs.version }}
+
+          body: |
+            ## PrintStash update
+
+            Nova release detectada no repositório oficial:
+
+            **xiao-villamor/PrintStash**
+
+            Versão atual:
+            `${{ steps.current.outputs.version }}`
+
+            Nova versão:
+            `${{ steps.release.outputs.version }}`
+
+            ### Alterações
+
+            - Atualiza `umbrel-app.yml`
+            - Atualiza imagem frontend
+            - Atualiza imagem API
+            - Atualiza URL do ícone
+            - Verifica se as imagens Docker existem no GHCR
+
+            ### Antes de instalar
+
+            - Verificar o changelog da release
+            - Fazer backup do PrintStash
+            - Confirmar compatibilidade das migrações
+
+            Release:
+            https://github.com/xiao-villamor/PrintStash/releases/tag/${{ steps.release.outputs.tag }}
+
+          labels: |
+            automated
+            printstash
+            dependencies
