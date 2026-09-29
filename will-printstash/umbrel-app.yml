@@ -2,7 +2,7 @@ manifestVersion: 1
 id: will-printstash
 category: utilities
 name: PrintStash
-version: "0.13.0"
+version: "0.14.0"
 tagline: Organize seus arquivos de impressão 3D
 icon: icon.svg
 description: >-
