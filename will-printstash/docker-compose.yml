@@ -5,14 +5,14 @@ services:
       APP_PORT: 3000
 
   frontend:
-    image: ghcr.io/xiao-villamor/printstash-frontend:0.13.0
+    image: ghcr.io/xiao-villamor/printstash-frontend:0.14.0
     restart: unless-stopped
     depends_on:
       api:
         condition: service_healthy
 
   api:
-    image: ghcr.io/xiao-villamor/printstash-api-lite:0.13.0
+    image: ghcr.io/xiao-villamor/printstash-api-lite:0.14.0
     restart: unless-stopped
     environment:
       VAULT_SETUP_MODE: trusted_network
