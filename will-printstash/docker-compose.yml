@@ -1,7 +1,8 @@
-version: "3.7"
+# PrintStash v0.15.0 — Umbrel
+# Instalação limpa: banco e dados internos em APP_DATA_DIR; NAS montado somente leitura.
+# Preserve o serviço app_proxy: ele integra o PrintStash ao proxy do Umbrel.
 
 services:
-
   app_proxy:
     environment:
       APP_HOST: will-printstash_printstash_1
@@ -9,7 +10,7 @@ services:
       PROXY_AUTH_ADD: "false"
 
   printstash:
-    image: ghcr.io/xiao-villamor/printstash:0.14.0
+    image: ghcr.io/xiao-villamor/printstash:0.15.0
     restart: unless-stopped
     stop_grace_period: 60s
 
@@ -24,8 +25,11 @@ services:
     cpus: 2
 
     volumes:
-      - ${APP_DATA_DIR}/data:/data
-      - home1_volume:/mnt/library
+      # Dados exclusivos desta nova instalação: SQLite, previews, cache e backups.
+      - ${APP_DATA_DIR:?APP_DATA_DIR precisa estar definido no .env}/data:/data
+
+      # Biblioteca do NAS: preserva os originais e impede gravações pelo PrintStash.
+      - home1_volume:/mnt/library:ro
 
 volumes:
   home1_volume:
